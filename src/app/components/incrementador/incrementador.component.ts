@@ -1,5 +1,4 @@
 import { Component, Input, Output, ViewChild, OnInit, EventEmitter, ElementRef } from '@angular/core';
-import { ProgressComponent } from 'src/app/pages/progress/progress.component';
 
 @Component({
   selector: 'app-incrementador',
@@ -8,7 +7,7 @@ import { ProgressComponent } from 'src/app/pages/progress/progress.component';
 })
 export class IncrementadorComponent implements OnInit {
 
-  @ViewChild('txtProgress' ,{static: false}) txtProgress: ElementRef;
+  @ViewChild('txtProgress', {static:false}) txtProgress: ElementRef;
 
   @Input('nombre') leyenda: string = 'Leyenda';
   @Input() progreso: number = 50;
