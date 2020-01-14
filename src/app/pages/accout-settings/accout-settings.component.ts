@@ -1,5 +1,4 @@
 import { Component, Inject, OnInit } from '@angular/core';
-//import { DOCUMENT } from '@angular/platform-browser';
 
 import { SettingsService } from '../../services/service.index';
 
