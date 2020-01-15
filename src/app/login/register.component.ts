@@ -78,10 +78,9 @@ export class RegisterComponent implements OnInit {
       Swal.fire({
         title: 'Importante',
         text: 'Debe de aceptar las condiciones',
-        //type: 'info',
-        allowOutsideClick: false
+        //type: 'success'
       });
-      Swal.showLoading();
+
       return;
     }
 

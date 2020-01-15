@@ -3,7 +3,6 @@ import { Subscription, Observable, Subscriber } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 // tslint:disable-next-line:import-blacklist
-//import { Observable, Subscription } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-rxjs',
