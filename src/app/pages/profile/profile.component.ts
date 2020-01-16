@@ -49,8 +49,10 @@ export class ProfileComponent implements OnInit {
       Swal.fire({
         title: 'Sólo imágenes',
         text: 'El archivo seleccionado no es una imagen',
-        //type: 'success'
+        //type: 'info',
+        allowOutsideClick: false
       });
+      Swal.showLoading();
 
       this.imagenSubir = null;
       return;
