@@ -3,7 +3,8 @@ import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services/service.index';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 
-import Swal from 'sweetalert2';
+//declare var swal: any;
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-usuarios',
@@ -90,42 +91,57 @@ export class UsuariosComponent implements OnInit {
     if ( usuario._id === this._usuarioService.usuario._id ) {
       //swal('No puede borrar usuario', 'No se puede borrar a si mismo', 'error');
       Swal.fire({
+        icon: 'error',
         title: 'No puede borrar usuario',
         text: 'No se puede borrar a si mismo',
-        //type: 'info',
-        allowOutsideClick: false
-      });
-      //Swal.showLoading();
-      
+        footer: '<a href>Why do I have this issue?</a>'
+      })
       return;
     }
-    
-    // Swal({
+  
+    Swal.fire({
+      title: '¿Esta seguro?',
+      text: 'Esta a punto de borrar a ' + usuario.nombre,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borrarlo!'
+    }).then((result) => {
+      if (result.value) {
+
+        this._usuarioService.borrarUsuario( usuario._id )
+                   .subscribe( borrado => {
+                       this.cargarUsuarios();
+                   });
+
+        Swal.fire(
+          'Borrado!',
+          'El registro a sido borrado',
+          'success'
+        )
+      }
+    })
+
+    // swal({
     //   title: '¿Esta seguro?',
     //   text: 'Esta a punto de borrar a ' + usuario.nombre,
     //   icon: 'warning',
     //   buttons: true,
     //   dangerMode: true,
     // })
-    Swal.fire({
-      title: '¿Esta seguro?',
-      text: 'Esta a punto de borrar a ' + usuario.nombre,
-      icon: 'warning',
-      buttonsStyling: true
-      //dangerMode: true
-    })
-    .then( borrar => {
+    // .then( borrar => {
 
-      if (borrar) {
+    //   if (borrar) {
 
-        this._usuarioService.borrarUsuario( usuario._id )
-                  .subscribe( borrado => {
-                      this.cargarUsuarios();
-                  });
+    //     this._usuarioService.borrarUsuario( usuario._id )
+    //               .subscribe( borrado => {
+    //                   this.cargarUsuarios();
+    //               });
 
-      }
+    //   }
 
-    });
+    // });
 
   }
 

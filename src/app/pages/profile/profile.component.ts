@@ -52,8 +52,7 @@ export class ProfileComponent implements OnInit {
         //type: 'info',
         allowOutsideClick: false
       });
-      Swal.showLoading();
-
+      
       this.imagenSubir = null;
       return;
     }

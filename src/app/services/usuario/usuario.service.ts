@@ -106,7 +106,7 @@ export class UsuarioService {
                   //type: 'info',
                   allowOutsideClick: false
                 });
-                //Swal.showLoading();
+                
                 return resp.usuario;
               }));
   }
@@ -126,12 +126,11 @@ export class UsuarioService {
 
                   //swal('Usuario actualizado', usuario.nombre, 'success' );
                   Swal.fire({
-                    title: 'Usuario actualizado',
+                    title: 'Usuario Actualizado',
                     text: usuario.nombre,
                     //type: 'info',
                     allowOutsideClick: false
                   });
-                  //Swal.showLoading();
 
                   return true;
                 }));
@@ -147,12 +146,10 @@ export class UsuarioService {
             //swal( 'Imagen Actualizada', this.usuario.nombre, 'success' );
             Swal.fire({
               title: 'Imagen Actualizada',
-              text:  this.usuario.nombre,
+              text: this.usuario.nombre,
               //type: 'info',
               allowOutsideClick: false
             });
-            //Swal.showLoading();
-
             this.guardarStorage( id, this.token, this.usuario );
 
           })
@@ -191,7 +188,6 @@ export class UsuarioService {
                     //type: 'info',
                     allowOutsideClick: false
                   });
-                  //Swal.showLoading();
                   return true;
                 }));
 
