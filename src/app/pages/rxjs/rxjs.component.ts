@@ -1,8 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, Observable, Subscriber } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
 
-// tslint:disable-next-line:import-blacklist
+//import { Observable } from 'rxjs/Observable';
+//import { Subscription } from 'rxjs/Subscription';
+
+//import { Observable } from 'rxjs/internal/Observable';
+//import { Subscription } from 'rxjs/internal/Subscription';
+
+//import 'rxjs/add/operator/retry';
+//import 'rxjs/add/operator/filter';
+//import { map } from 'rxjs/internal/operators/map';
+import { filter } from 'rxjs/internal/operators/filter';
+import { map } from 'rxjs/operators';
+import { Subscriber, Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-rxjs',
@@ -79,6 +88,7 @@ export class RxjsComponent implements OnInit, OnDestroy {
     );
 
   }
+
 }
 
 

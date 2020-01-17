@@ -3,6 +3,9 @@ import { Usuario } from '../../models/usuario.model';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 
+//import swal from 'sweetalert';
+import Swal from 'sweetalert2';
+
 
 //import { Observable } from 'rxjs/Observable';
 //import 'rxjs/add/operator/map';
@@ -10,11 +13,10 @@ import { URL_SERVICIOS } from '../../config/config';
 
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
-import { map, catchError } from 'rxjs/operators';
-
-import Swal from 'sweetalert2';
-import { Observable } from 'rxjs';
-//import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/internal/operators/map';
+import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
+//import { map } from 'rxjs/operators';
 
 @Injectable()
 export class UsuarioService {
@@ -30,6 +32,39 @@ export class UsuarioService {
   ) {
     this.cargarStorage();
   }
+
+
+  renuevaToken() {
+
+    let url = URL_SERVICIOS + '/login/renuevatoken';
+    url += '?token=' + this.token;
+
+    return this.http.get( url ).pipe(
+                map( (resp: any) => {
+
+                  this.token = resp.token;
+                  localStorage.setItem('token', this.token );
+                  console.log('Token renovado');
+
+                  return true;
+                }),
+                catchError( err => {
+                //.catch( err => {
+                  this.router.navigate(['/login']);
+                  //swal( 'No se pudo renovar token', 'No fue posible renovar token', 'error' );
+                  Swal.fire({
+                    title: 'No se puedo renovar token',
+                    text: 'No fue posible renovar token',
+                    //type: 'info',
+                    allowOutsideClick: false
+                  });
+
+                  return Observable.throw( err );
+                }));
+
+
+  }
+
 
   estaLogueado() {
     return ( this.token.length > 5 ) ? true : false;
@@ -125,16 +160,9 @@ export class UsuarioService {
               map( (resp: any) => {
 
                 //swal('Usuario creado', usuario.email, 'success' );
-                Swal.fire({
-                  title: 'Usuario creado',
-                  text: usuario.email,
-                  //type: 'info',
-                  allowOutsideClick: false
-                });
-
                 return resp.usuario;
               }),
-              catchError (err => {
+              catchError( err => {
               //.catch( err => {
                 //swal( err.error.mensaje, err.error.errors.message, 'error' );
                 Swal.fire({
@@ -171,12 +199,12 @@ export class UsuarioService {
 
                   return true;
                 }),
-                catchError( err => {
+                catchError ( err => {
                 //.catch( err => {
                   //swal( err.error.mensaje, err.error.errors.message, 'error' );
                   Swal.fire({
                     title: err.error.mensaje,
-                    text: err.error.errors.mensaje,
+                    text: err.error.errors.message,
                     //type: 'info',
                     allowOutsideClick: false
                   });
@@ -233,7 +261,7 @@ export class UsuarioService {
                 map( resp => {
                   //swal('Usuario borrado', 'El usuario a sido eliminado correctamente', 'success');
                   Swal.fire({
-                    title: 'Usario borrado',
+                    title: 'Usuario borrado',
                     text: 'El usuario a sido eliminado correctamente',
                     //type: 'info',
                     allowOutsideClick: false
